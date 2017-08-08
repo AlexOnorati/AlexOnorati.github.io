@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DBOP</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+      /* Optional: Makes the sample page fill the window. */
+      #map{
+        height: 100%;
+        width: 100%;
+      }
+
+      #map-container {
+        height: 400px;
+      }
+      h3 {
+        text-align: center;
+      }
+
+      div.agenda-item, p {
+
+        text-align: left;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8" id="map-container"><div id="map"></div></div>
+      <div class="col-md-2"></div>
+
+    </div>
+    <div class="row">
+
+    <div id="agenda" class="containter col-md-12"></div>
+
+    </div>
+    </div>
+
+
+    </div>
+    <script>
+      // Note: This example requires that you consent to location sharing when
+      // prompted by your browser. If you see the error "The Geolocation service
+      // failed.", it means you probably did not give permission for the browser to
+      // locate you.
+      var map, infoWindow;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 47.5617 , lng:-122.2859 },//47.5614
+          zoom: 17,
+          scrollwheel: false,
+   navigationControl: true,
+   mapTypeControl: true,
+   scaleControl: false,
+   draggable: true,
+   mapTypeId: google.maps.MapTypeId.ROADMAP,
+   zoomControl: false,
+   streetViewControl: false,
+   mapTypeControlOptions: {
+    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+  }
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+
+        let agenda = {
+          "locations": [
+            {
+              "name":"Main Stage",
+              "id":"1",
+              "center": {lat: 47.5617 , lng:-122.2859 },
+              "stroke-color":"#FF0000",
+              "fill-color":"#FF0000",
+              "shape":[
+
+                {lat: 47.5609 , lng:-122.2866 },
+                {lat: 47.5608 , lng:-122.2868 },
+                {lat: 47.5612 , lng:-122.2872 },
+                {lat: 47.5613 , lng:-122.287 }
+
+
+              ],
+
+              "activities":[
+                {
+                  "time": "11:00 AM",
+                  "name": " BDOP Announcements",
+                  "catagory": "2"
+                },
+                {
+                  "time": "11:15 AM",
+                  "name": "DJ Set 106.9FM",
+                  "catagory": "1"
+                },
+                {
+                  "time": "12:45 PM",
+                  "name": "Guest Speaker / Announcements",
+                  "catagory": "3"
+                },
+                {
+                  "time": "1:00 PM",
+                  "name": "NW TAP Connection",
+                  "catagory": "3"
+                },
+                {
+                  "time": "1:30 PM",
+                  "name": "Mixed Fit - Leilani Farr",
+                  "catagory": "3"
+                },
+                {
+                  "time": "1:45 PM",
+                  "name": "Black Stax or Good Bag Band (Waiting on response from Rep.)",
+                  "catagory": "3"
+                },
+                {
+                  "time": "2:30 PM",
+                  "name": "Teen Summer Musical Promo Tour ",
+                  "catagory": "3"
+                },
+                {
+                  "time": "2:45 PM",
+                  "name": "Throwbacks",
+                  "catagory": "3"
+                },
+                {
+                  "time": "3:10 PM",
+                  "name": "Guest Speaker / Announcements",
+                  "catagory": "3"
+                },
+                {
+                  "time": "2:30 PM",
+                  "name": "ONi Drum Dance",
+                  "catagory": "3"
+                },
+
+                {
+                  "time": "3:30 PM",
+                  "name": "Same and Magician",
+                  "catagory": "3"
+                },
+                {
+                  "time": "4:00 PM",
+                  "name": "Community Wellness Rhythm & Dance",
+                  "catagory": "3"
+                },
+                {
+                  "time": "4:30 PM",
+                  "name": "Austin Anderson",
+                  "catagory": "3"
+                },
+                {
+                  "time": "5:00 PM",
+                  "name": "Closing Announcements / End of Event",
+                  "catagory": "3"
+                }
+              ]
+            },
+            {
+              "name":"Rainer Community Center",
+              "id": "2",
+              "center": {lat: 47.5617 , lng:-122.2859 },//
+              "stroke-color":"#FF0000",
+              "fill-color":"#FF0000",
+              "shape":[
+                {lat: 47.5612 , lng:-122.2843},
+                {lat: 47.5612 , lng:-122.2847},
+                {lat: 47.5616 , lng:-122.2847},
+                {lat: 47.5616 , lng:-122.2843}
+              ],
+
+              "activities":[
+                {
+                  "time": "11:00 AM",
+                  "name": "Intergenerational pickleball",
+                  "catagory": "2",
+                },
+                {
+                  "time": "12:15 PM",
+                  "name": "Seattle Roller Derby",
+                  "catagory": "1",
+                },
+                {
+                  "time": "1:30 PM",
+                  "name": "WheelChair Basketball",
+                  "catagory": "3",
+                },
+                {
+                  "time": "3:00 PM",
+                  "name": "Goalball",
+                  "catagory": "3",
+                }
+              ]
+            },
+            {
+              "name":"Tennis Activity",
+              "id": "3",
+              "center": {lat: 47.5617 , lng:-122.2859 },//
+              "stroke-color":"#FF0000",
+              "fill-color":"#FF0000",
+              "shape":[
+                {lat: 47.5626 , lng:-122.2865 },
+                {lat: 47.5626 , lng:-122.28735 },
+                {lat: 47.5623 , lng:-122.28735 },
+                {lat: 47.5623 , lng:-122.2865 }
+              ],
+
+              "activities":[
+                {
+                  "time": "11:00 AM",
+                  "name": "Tennis Clinic (Ages 10 and younger)",
+                  "catagory": "2",
+                },
+                {
+                  "time": "12:30 PM",
+                  "name": "Cardio Tennis",
+                  "catagory": "1",
+                },
+                {
+                  "time": "2:00 PM",
+                  "name": "Collegiate Exhibition",
+                  "catagory": "3",
+                },
+                {
+                  "time": "3:30 PM",
+                  "name": "Hit for Prizes",
+                  "catagory": "3",
+                }
+              ]
+            },
+            {
+              "name":"Garden Activity",
+              "id": "4",
+              "center": {lat: 47.5617 , lng:-122.2842 },
+              "stroke-color":"#FF0000",
+              "fill-color":"#FF0000",
+              "shape":[
+                {lat: 47.5608 , lng:-122.2831 },
+                {lat: 47.5608 , lng:-122.2826 },
+                {lat: 47.5612 , lng:-122.2826 },
+                {lat: 47.5612 , lng:-122.2831 }
+              ],
+
+              "activities":[
+                {
+                  "time": "11:30 AM - 4:30 PM",
+                  "name": "Easy do-it-yourself fruit waters (once an hour, on the half hour)",
+                  "catagory": "2",
+                },
+                {
+                  "time": "12:00 PM - 4:00 PM",
+                  "name": "Farm to table salad demo of how to make a simple raspberry vinaigrette for greens that can grow in Seattle (once an hour, on the hour)",
+                  "catagory": "1",
+                }
+
+              ]
+            },{
+              "name":"Main Stage",
+              "id":"5",
+              "center": {lat: 47.5617 , lng:-122.2859 },//
+              "stroke-color":"#FF0000",
+              "fill-color":"#FF0000",
+              "shape":[
+
+                {lat: 47.5615 , lng:-122.2870 },
+                {lat: 47.5615 , lng:-122.2855 },
+                {lat: 47.5619 , lng:-122.2855 },
+                {lat: 47.5619 , lng:-122.2870 }
+              ],
+
+              "activities":[
+                {
+                  "time": "Zone 1) 11:00 AM - 12:30 PM",
+                  "name": "Ultimate Frisbee",
+                  "catagory": "2"
+                },
+                {
+                  "time": "Zone 1) 1:00 - 2:30 PM",
+                  "name": "Soccer",
+                  "catagory": "1"
+                },
+                {
+                  "time": "Zone 1) 3:00 - 4:30 PM",
+                  "name": "Lacrosse",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 2) 11:00 AM - 1:30 PM",
+                  "name": "NW TAP Connection",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 2) 2:00 - 4:00 PM",
+                  "name": "Volleyball",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 3) 11:00 AM - 5:00 PM ",
+                  "name": "Zoo (Run like an Animal)",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 4) 11:00 AM - 1:30 PM",
+                  "name": "Flag Football",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 4) 2:30 PM - 4:30 PM",
+                  "name": "Skate Like a Girl",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 5) 11:00 AM - 1:30 PM",
+                  "name": "Austin Foundation Fun Activities",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 5) 2:00 - 4:30 PM",
+                  "name": "United Way of King County Fun Activities",
+                  "catagory": "3"
+                },
+
+                {
+                  "time": "Zone 6) 11:00 AM - 5:00 PM",
+                  "name": "Tug of War",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 6) 11:00 AM - 5:00 PM",
+                  "name": "Track",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 6) 11:00 AM - 5:00 PM",
+                  "name": "Sack races",
+                  "catagory": "3"
+                },
+                {
+                  "time": "Zone 6) 11:00 AM - 5:00 PM",
+                  "name": "Three legged races",
+                  "catagory": "3"
+                }
+
+              ]
+            },
+            {
+              "name":"Water activities at Mt. Baker Rowing and sailing Center (MBRSC)",
+              "id":"6",
+              "center": {lat: 47.5705 , lng:-122.2777 },
+              "stroke-color":"#FF0000",
+              "fill-color":"#FF0000",
+              "shape":[
+                {lat: 47.57025, lng:-122.2782 },
+                {lat: 47.57025, lng:-122.2772 },
+                {lat: 47.57075 , lng:-122.2772 },
+                {lat: 47.57075 , lng:-122.2782 },
+
+              ],
+
+              "activities":[
+                {
+                  "time": "11:00 AM - 4:30 PM",
+                  "name": " Tug of War",
+                  "catagory": "2"
+                },
+                {
+                  "time": "12:00 PM",
+                  "name": "On-land rowing and sailing",
+                  "catagory": "1"
+                },
+                {
+                  "time": "1:00 PM",
+                  "name": "Dock rowing ",
+                  "catagory": "3"
+                },
+                {
+                  "time": "2:00 PM",
+                  "name": "Windsurfing simulator and dock rowing",
+                  "catagory": "3"
+                },
+                {
+                  "time": "3:00 PM",
+                  "name": "On-land rowing and sailing",
+                  "catagory": "3"
+                },
+                {
+                  "time": "4:30 PM",
+                  "name": "All water activities over",
+                  "catagory": "3"
+                },
+
+              ]
+            },
+            {
+              "name":"Basketball courts",
+              "id":"7",
+              "center": {lat: 47.5617 , lng:-122.2859 },//
+              "stroke-color":"#FF0000",
+              "fill-color":"#FF0000",
+              "shape":[
+                {lat: 47.56235, lng:-122.28625 },
+                {lat: 47.56235, lng:-122.2855 },
+                {lat: 47.56255, lng:-122.2855 },
+                {lat: 47.56255, lng:-122.28625 }
+
+              ],
+
+              "activities":[
+                {
+                  "time": "11:30 AM - 12:00 PM",
+                  "name": "Drill Team Performance",
+                  "catagory": "2"
+                },
+                {
+                  "time": "11:00 AM - 5:00 PM",
+                  "name": "3-on-3 Basketball",
+                  "catagory": "1"
+                },
+                {
+                  "time": "12:00 - 1:00 PM",
+                  "name": "Hot Shot",
+                  "catagory": "3"
+                },
+                {
+                  "time": "1:15 - 1:45 PM",
+                  "name": "SPR TSM Performance",
+                  "catagory": "3"
+                },
+                {
+                  "time": "1:50 - 2:10 PM",
+                  "name": "Soul Train by Young Queens",
+                  "catagory": "3"
+                },
+                {
+                  "time": "2:15 - 3:45 PM",
+                  "name": "Hot Shot",
+                  "catagory": "3"
+                },
+                {
+                  "time": "3:45 - 4:00 PM",
+                  "name": "CD Panthers Performance",
+                  "catagory": "3"
+                },
+                {
+                  "time": "4:00 - 5:00 PM",
+                  "name": "Community Basketball Game",
+                  "catagory": "3"
+                },
+              ]
+            },
+            {
+              "name":"Transportation / Shuttle Information",
+              "id":"8",
+              "center": {lat: 47.5617 , lng:-122.2859 },//
+              "stroke-color":"#FF0000",
+              "fill-color":"#FF0000",
+              "shape":[
+
+                {"lat": 47.5618 , "lng":-122.2844},
+                {"lat": 47.5618 , "lng":-122.2849},
+                {"lat": 47.5622 , "lng":-122.2849},
+                {"lat": 47.5622 , "lng":-122.2844}
+              ],
+
+              "activities":[
+                {
+                  "time": "",
+                  "name": "To and from different community centers",
+                  "catagory": "2"
+                },
+                {
+                  "time": "12:00 - 4:30 PM",
+                  "name": "To and from Mt. Baker Rowing and Sailing (MBRSC), running evey 15 minutes",
+                  "catagory": "3"
+                },
+              ]
+            },
+            {
+              "name":"Vendors and Community Centers Booths",
+              "id":"9",
+              "center": {lat: 47.5617 , lng:-122.2859 },//
+              "stroke-color":"#FF0000",
+              "fill-color":"#FF0000",
+              "shape":[
+
+                {lat: 47.5610 , lng:-122.2865 },
+                {lat: 47.5610 , lng:-122.2860 },
+                {lat: 47.5614 , lng:-122.2855 },
+                {lat: 47.5614 , lng:-122.2870 }
+              ],
+
+              "activities":[
+                {
+                  "time": "1.",
+                  "name": "MetroPCS",
+                  "catagory": "2"
+                },
+                {
+                  "time": "2.",
+                  "name": "Lakeside School",
+                  "catagory": "3"
+                },
+                {
+                  "time": "3.",
+                  "name": "Lakeside School",
+                  "catagory": "3"
+                },
+                {
+                  "time": "4.",
+                  "name": "Rainer Leadership Academy",
+                  "catagory": "3"
+                },
+                {
+                  "time": "5.",
+                  "name": "Queen Anne CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "6.",
+                  "name": "Mountlake CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "7.",
+                  "name": "Nathinal Park Service",
+                  "catagory": "3"
+                },
+                {
+                  "time": "8.",
+                  "name": "Seattle Aquarium",
+                  "catagory": "3"
+                },
+                {
+                  "time": "9.",
+                  "name": "Seattle Art Museum",
+                  "catagory": "3"
+                },
+                {
+                  "time": "10.",
+                  "name": "High Point CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "11.",
+                  "name": "South Point CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "12.",
+                  "name": "Year Up",
+                  "catagory": "3"
+                },
+                {
+                  "time": "13.",
+                  "name": "Laurel Hurst CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "14.",
+                  "name": "Magnuson CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "15.",
+                  "name": "Lao Women Association",
+                  "catagory": "3"
+                },
+                {
+                  "time": "16.",
+                  "name": "Lao Community Service Center",
+                  "catagory": "3"
+                },
+                {
+                  "time": "17.",
+                  "name": "Lady Bug House",
+                  "catagory": "3"
+                },
+                {
+                  "time": "18.",
+                  "name": "Ravenna CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "19.",
+                  "name": "International and Chinatown CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "20.",
+                  "name": "Public Health Sea/King Immunization",
+                  "catagory": "3"
+                },
+                {
+                  "time": "21.",
+                  "name": "Fathers/Sons Together",
+                  "catagory": "3"
+                },
+                {
+                  "time": "22.",
+                  "name": "Tesler CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "23.",
+                  "name": "Community Wellness Dance",
+                  "catagory": "3"
+                },
+                {
+                  "time": "24.",
+                  "name": "Age up/Southend Ultimate Program",
+                  "catagory": "3"
+                },
+                {
+                  "time": "26.",
+                  "name": "ARC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "27.",
+                  "name": "Columbia Library",
+                  "catagory": "3"
+                },
+                {
+                  "time": "28.",
+                  "name": "Black Men/Black Women Health Study",
+                  "catagory": "3"
+                },
+                {
+                  "time": "29.",
+                  "name": "American Lung Association",
+                  "catagory": "3"
+                },
+                {
+                  "time": "30.",
+                  "name": "United Negro College Fund",
+                  "catagory": "3"
+                },
+                {
+                  "time": "31.",
+                  "name": "Parent Map",
+                  "catagory": "3"
+                },
+                {
+                  "time": "32.",
+                  "name": "Urban Native Education Alliance",
+                  "catagory": "3"
+                },
+                {
+                  "time": "33.",
+                  "name": "SPR's Environmental Learning Centers",
+                  "catagory": "3"
+                },
+                {
+                  "time": "34.",
+                  "name": "NailahHarris",
+                  "catagory": "3"
+                },
+                {
+                  "time": "35.",
+                  "name": "Garfield CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "36.",
+                  "name": "Hiawatha CC",
+                  "catagory": "3"
+                },
+                {
+                  "time": "37.",
+                  "name": "Seattle Public Utilities",
+                  "catagory": "3"
+                },
+                {
+                  "time": "38.",
+                  "name": "Seattle City Lights",
+                  "catagory": "3"
+                },
+                {
+                  "time": "39.",
+                  "name": "Springfield Creamery/Nancy Yogurt",
+                  "catagory": "3"
+                },
+                {
+                  "time": "40.",
+                  "name": "Valley Cities Behavior Health",
+                  "catagory": "3"
+                },
+                {
+                  "time": "41.",
+                  "name": "Guided Pathway Support",
+                  "catagory": "3"
+                },
+                {
+                  "time": "42.",
+                  "name": "SPR's Specialized Populations Unit",
+                  "catagory": "3"
+                },
+                {
+                  "time": "43.",
+                  "name": "Sea Mar Community Health",
+                  "catagory": "3"
+                },
+                {
+                  "time": "44.",
+                  "name": "Alpha Material Arts",
+                  "catagory": "3"
+                },
+                {
+                  "time": "45.",
+                  "name": "Young Women Empowered",
+                  "catagory": "3"
+                },
+                {
+                  "time": "46.",
+                  "name": "Capoeira",
+                  "catagory": "3"
+                },
+                {
+                  "time": "47.",
+                  "name": "Garinagu Hounga",
+                  "catagory": "3"
+                }
+              ]
+            }
+
+          ]
+        };
+
+        let locations = agenda.locations;
+        let shapeSets = {};
+
+        for (let i = 0; i < locations.length; i++) {
+          let element = addAgendaLocation(locations[i], agenda.catagories, map);
+          let shape = addLocationToMap(locations[i], map);
+
+          shapeSets[shape.id] = shape.object;
+          shapeSets["Element"+shape.id] = element;
+          let bounds = new google.maps.LatLngBounds();
+          for(let j = 0; j < locations[i].shape.length; j++){
+            bounds.extend(new google.maps.LatLng(locations[i].shape[j].lat, locations[i].shape[j].lng));
+          }
+
+          var marker = new google.maps.Marker({
+          position: bounds.getCenter(),
+          label: locations[i].id,
+          map: map
+        });
+        }
+        for(let k = 0; k < locations.length; k++){
+
+          shapeSets["Element"+(k+1)].addEventListener('click', function (event) {
+
+            for(let j = 0; j < locations.length; j++){
+              let color = "#FF0000";
+              if(j == k){
+                color = "#0000FF";
+                var center = new google.maps.LatLng(locations[k].center.lat, locations[k].center.lng);
+                // using global variable:
+                map.panTo(center);
+
+              }
+            shapeSets[j+1].setOptions({strokeColor: color, fillColor: color});
+            }
+
+          });
+        }
+
+      }
+
+      function addAgendaLocation(location, catagories, map){
+        var locationElement = document.createElement("DIV");
+        locationElement.className += "container row";
+        locationElement.id = location.id;
+        locationTitle = document.createElement("DIV");
+        locationTitle.className += "row";
+        locationText = document.createElement("DIV");
+        locationText.className += "col-md-12";
+        locationName = document.createElement("H2");
+        locationName.innerHTML = location.id + ") " + location.name;
+        locationText.appendChild(locationName);
+        locationTitle.appendChild(locationText);
+        locationElement.appendChild(locationTitle);
+
+        for(let i = 0; i < location.activities.length; i++){
+          var activity = location.activities[i];
+          var activityElement = document.createElement("DIV");
+          activityElement.className += "row";
+
+
+          var timeAndTitle = document.createElement("DIV");
+          timeAndTitle.className += "col-md-1 agenda-item";
+          timeAndTitle.innerHTML = "- " + activity.time + " " + activity.name;
+
+          activityElement.appendChild(timeAndTitle);
+          //var iconWrapper = document.createElement("DIV");
+          //iconWrapper.className = "col-md-1";
+          //var icon = document.createElement("I");
+
+          //icon.className += "fa "+catagories[location.activities[i].catagory]+" fa-lg";
+          //iconWrapper.appendChild(icon);
+          //activityElement.appendChild(iconWrapper);
+          padding = document.createElement("DIV");
+          padding.className = "col-md-4";
+
+          locationElement.appendChild(activityElement);
+        }
+
+
+         locationElement.addEventListener('click', function (event) {
+           window.location.hash = '';
+           window.location.hash = '#map';
+
+
+
+       });
+        document.getElementById("agenda").appendChild(locationElement);
+        return locationElement;
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+
+      var addListenersOnShape = function(shape) {
+        google.maps.event.addListener(shape, 'click', function (event) {
+          window.location.hash = '';
+          window.location.hash = '#' + shape.id;
+
+
+      });
+
+  }
+
+      function addLocationToMap(location, map){
+        var shapeCoords = location.shape;
+
+        // Construct the polygon.
+        var shape = new google.maps.Polygon({
+          paths: shapeCoords,
+          strokeColor: location['stroke-color'],
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: location['fill-color'],
+          fillOpacity: 0.35,
+          name: location.name,
+          id: location.id
+        });
+        shape.setMap(map);
+        addListenersOnShape(shape);
+        return {"id": location.id, "object": shape};
+      }
+
+
+      // Define the LatLng coordinates for the polygon's path.
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFUVKsknSpDi4TcngF9rK3yIL0JOS78Z4&callback=initMap">
+    </script>
+  </body>
+</html>
