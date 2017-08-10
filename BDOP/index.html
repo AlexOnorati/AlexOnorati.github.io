@@ -15,16 +15,18 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-
-      /* Optional: Makes the sample page fill the window. */
+      
       #map{
         height: 100%;
         width: 100%;
+        border: 3px solid  #d3d3d3;
       }
 
       #map-container {
+        height: 400px;
+      }
+
+      #agenda {
         height: 400px;
       }
       h3 {
@@ -33,12 +35,28 @@
 
       div.agenda-item, p {
 
-        text-align: left;
+      }
+
+      .desc{
+        /*padding-left: 4px;
+        padding-right: 4px;*/
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+      .display{
+        border: 2px solid  #d3d3d3;
+    border-radius: 5px;
+    background-color: #fcfcfd;
+    /*padding: 3px, 3px;*/
+    margin-top: 15px;
+    /*margin-left: 3px;*/
+    /*margin-right: 3px;*/
       }
 
     </style>
   </head>
   <body>
+    <br>
     <div class="container">
       <div class="row">
       <div class="col-md-2"></div>
@@ -47,23 +65,26 @@
 
     </div>
     <div class="row">
-
-    <div id="agenda" class="containter col-md-12"></div>
-
+    <div class="container   col-md-12">
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="display desc col-md-12">
+    <h4>Click on a location in the agenda to see where it is on the map.</h4></div></div>
+    <div class="col-md-1">
+  </div>
     </div>
+    <div id="agenda" class="container col-md-12"></div>
+
     </div>
 
 
     </div>
     <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
+      
       var map, infoWindow;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 47.5617 , lng:-122.2859 },
+          center: {lat: 47.5617 , lng:-122.2859 },//47.5614
           zoom: 17,
           scrollwheel: false,
    navigationControl: true,
@@ -758,8 +779,10 @@
           var marker = new google.maps.Marker({
           position: bounds.getCenter(),
           label: locations[i].id,
+          id: locations[i].id,
           map: map
         });
+          addListenersOnShape(marker);
         }
         for(let k = 0; k < locations.length; k++){
 
@@ -770,7 +793,7 @@
               if(j == k){
                 color = "#0000FF";
                 var center = new google.maps.LatLng(locations[k].center.lat, locations[k].center.lng);
-                // using global variable:
+             
                 map.panTo(center);
 
               }
@@ -784,9 +807,11 @@
 
       function addAgendaLocation(location, catagories, map){
         var locationElement = document.createElement("DIV");
-        locationElement.className += "container row";
+        let style = "display";
+        locationElement.className += "container row " + style;
         locationElement.id = location.id;
         locationTitle = document.createElement("DIV");
+
         locationTitle.className += "row";
         locationText = document.createElement("DIV");
         locationText.className += "col-md-12";
@@ -803,17 +828,17 @@
 
 
           var timeAndTitle = document.createElement("DIV");
-          timeAndTitle.className += "col-md-1 agenda-item";
-          timeAndTitle.innerHTML = "- " + activity.time + " " + activity.name;
+          timeAndTitle.className += "col-md-12";
+
+
+          var timeAndTitleText = document.createElement("H4");
+          timeAndTitleText.className += "agenda-item";
+          timeAndTitleText.innerHTML = "-&nbsp;" + activity.time + "&nbsp;" + activity.name;
+
+          timeAndTitle.appendChild(timeAndTitleText);
 
           activityElement.appendChild(timeAndTitle);
-          //var iconWrapper = document.createElement("DIV");
-          //iconWrapper.className = "col-md-1";
-          //var icon = document.createElement("I");
-
-          //icon.className += "fa "+catagories[location.activities[i].catagory]+" fa-lg";
-          //iconWrapper.appendChild(icon);
-          //activityElement.appendChild(iconWrapper);
+         
           padding = document.createElement("DIV");
           padding.className = "col-md-4";
 
@@ -828,6 +853,8 @@
 
 
        });
+       var brElement = document.createElement("BR");
+       locationElement.appendChild(brElement)
         document.getElementById("agenda").appendChild(locationElement);
         return locationElement;
       }
@@ -853,7 +880,7 @@
       function addLocationToMap(location, map){
         var shapeCoords = location.shape;
 
-        // Construct the polygon.
+        // Construct the shape.
         var shape = new google.maps.Polygon({
           paths: shapeCoords,
           strokeColor: location['stroke-color'],
@@ -870,7 +897,7 @@
       }
 
 
-      // Define the LatLng coordinates for the polygon's path.
+      
 
     </script>
     <script async defer
